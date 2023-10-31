@@ -12,7 +12,7 @@
             font-family: Crono;
             src: url("Summer\ Dream\ Sans\ DEMO\ .ttf");
         }
-        h1{
+        h1, span, p{
             font-family: 'Crono', Tahoma, Geneva, Verdana, sans-serif;
             color: #FFFFFF;
             font-size: 150px;
@@ -39,11 +39,71 @@
     </style>
 </head>
 <body>
-    <h1>00:00</h1>
+    <p id="idwatch"><span id="horas">00</span>:<span id="minutos">00</span>:<span id="segundos">00</span></p>
     <div id="centro">
-    <button>Iniciar</button>
-    <button>Resetar</button>
-    <button>Parar</button>
+    <button onclick="start()" id="idiniciar">Iniciar</button>
+    <button onclick="restart()" id="idresetar">Resetar</button>
+    <button onclick="pause()" id="idparar">Pausar</button>
     </div>
+    <script>
+           var status = "resetou" //resetou pausou iniciou
+           var sec = 0
+           var min = 0
+           var hr = 0
+           var inter
+
+           //funcionalidades 
+        function start(){
+            if (status != "iniciou"){
+            status = "iniciou"
+            console.log("iniciou")
+            inter = setInterval(watch, 1000)
+        }
+            
+        }
+        function pause(){
+            clearInterval(inter)
+            status = "pausou"
+            console.log("pausou")
+        }
+        function restart(){
+            clearInterval(inter)
+            status = "resetou"
+            console.log("resetou")
+           sec = 0
+           min = 0
+           hr = 0
+           document.getElementById("segundos").innerText =sec
+        document.getElementById("minutos").innerText =min
+            document.getElementById("horas").innerText =hr
+        }
+        //contagem
+        
+    function watch(){
+        if (status == "iniciou"){ 
+        if (sec >= 60){
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        sec = 0
+        min += 1
+    }
+    if (min >= 60){
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        sec = 0
+        min = 0
+        hr += 1
+    }
+        sec += 1
+        document.getElementById("segundos").innerText =sec
+        document.getElementById("minutos").innerText =min
+        document.getElementById("horas").innerText =hr
+        console.log("foi")
+    }   
+
+    }
+
+    //checando minutos
+
+    </script>
 </body>
+
 </html>
